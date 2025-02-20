@@ -197,6 +197,4 @@ terraform destroy -auto-approve
 
 #
 
-# Note: Must read and do Hands-on. Ref: [follow our in-depth tutorial, Output Data from Terraform.](https://developer.hashicorp.com/terraform/tutorials/configuration-language/outputs)
-
-#
+# `Note`: Must read and do Hands-on. Ref: [follow our in-depth tutorial, Output Data from Terraform.](https://developer.hashicorp.com/terraform/tutorials/configuration-language/outputs)
