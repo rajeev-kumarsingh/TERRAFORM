@@ -1,6 +1,6 @@
 # Query Data with Output
 
-- In the previous tutorial, you used an input variable to parameterize your Terraform configuration. In this tutorial, you will use output values to present useful information to the Terraform user.
+- In the previous DAY6, you used an input variable to parameterize your Terraform configuration. In this, you will use output values to present useful information to the Terraform user.
 
 # Initial configuration
 
@@ -87,7 +87,7 @@ resource "aws_instance" "app_server" {
 terraform init
 ```
 
-![alt text](image.png)
+![alt text](./images/image.png)
 
 ## Validate the main.tf file syntax for errors
 
@@ -95,7 +95,7 @@ terraform init
 terraform validate
 ```
 
-![alt text](image-1.png)
+![alt text](./images/image-1.png)
 
 #
 
@@ -105,8 +105,8 @@ terraform validate
 terraform apply -auto-approve
 ```
 
-![alt text](image-2.png)
-![alt text](image-3.png)
+![alt text](./images/image-2.png)
+![alt text](./images/image-3.png)
 
 #
 
@@ -144,7 +144,7 @@ output "instance_public_ip" {
 terraform apply -auto-approve
 ```
 
-![alt text](image-4.png)
+![alt text](./images/image-4.png)
 
 #
 
@@ -154,7 +154,7 @@ terraform apply -auto-approve
 terraform output
 ```
 
-![alt text](image-5.png)
+![alt text](./images/image-5.png)
 
 - You can use Terraform outputs to connect your Terraform projects with other parts of your infrastructure, or with other Terraform projects.
 
@@ -166,7 +166,7 @@ terraform output
 terraform state list | grep aws_instance
 ```
 
-![alt text](image-6.png)
+![alt text](./images/image-6.png)
 
 #
 
@@ -191,9 +191,9 @@ output "vpc_id" {
 terraform destroy -auto-approve
 ```
 
-![alt text](image-7.png)
-![alt text](image-8.png)
-![alt text](image-9.png)
+![alt text](./images/image-7.png)
+![alt text](./images/image-8.png)
+![alt text](./images/image-9.png)
 
 #
 
