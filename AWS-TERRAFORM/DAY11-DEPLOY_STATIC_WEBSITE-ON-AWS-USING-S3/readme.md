@@ -201,7 +201,7 @@ For further customization, consider using **CloudFront** for CDN caching and **R
 
 `index.html`
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -236,14 +236,13 @@ For further customization, consider using **CloudFront** for CDN caching and **R
     </div>
   </body>
 </html>
-
 ```
 
 ---
 
 `error.html`
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -270,7 +269,6 @@ For further customization, consider using **CloudFront** for CDN caching and **R
     <p>Oops! The page you are looking for does not exist.</p>
   </body>
 </html>
-
 ```
 
 ---
