@@ -355,7 +355,7 @@ variable "INSTANCE_NAME" {
 touch main.tf
 ```
 
-```
+```hcl
 # Terraform provider and backend configurations (Defined in variables.tf)
 provider "aws" {
   region = var.aws_region
