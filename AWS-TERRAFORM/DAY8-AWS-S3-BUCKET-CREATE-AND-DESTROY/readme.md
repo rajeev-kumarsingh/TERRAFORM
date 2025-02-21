@@ -294,3 +294,127 @@ aws s3 ls
 ---
 
 Now, try deploying your **Terraform AWS S3 bucket**!
+
+#
+
+## Let's try to create and upload `demofile.txt` file together
+
+```
+variables.tf
+```
+
+```
+# AWS provider
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "5.87.0"
+    }
+  }
+}
+
+variable "aws_region" {
+  description = "The AWS region to deploy resources"
+  type = string
+  default = "us-east-2"
+}
+
+
+```
+
+#
+
+```
+main.tf
+
+```
+
+```
+# AWS provider is written in variables.tf file
+
+# AWS CONFIGURATION
+provider "aws" {
+  # Using variables.tf file variable
+  region = var.aws_region
+
+}
+
+# Add an S3 bucket resource
+
+resource "aws_s3_bucket" "my-unique-terraform-bucket-2025" {
+  bucket = "my-unique-terraform-bucket-2025" # must be unique globaly
+  tags = {
+    Name = "MyTerraformS3Bucket"
+    Environment = "Dev"
+  }
+}
+
+# To enable bucket versioning for the bucket, add
+resource "aws_s3_bucket_versioning" "versioning_example" {
+  bucket = aws_s3_bucket.my-unique-terraform-bucket-2025.id
+  versioning_configuration {
+    status = "Disabled"
+  }
+
+}
+
+# Make S3 Bucket Private/Public(Optional)
+# To control access using ACL(Access Control List)
+#resource "aws_s3_bucket_acl" "example_acl" {
+  #bucket = aws_s3_bucket.my-unique-terraform-bucket-2025.id
+  #acl = "private" # Options: private, public-read, public-read-write, authenticated-read
+
+#}
+
+# Use the Object Ownership setting instead: Modify your S3 bucket resource to explicitly set the ownership control:
+resource "aws_s3_bucket_ownership_controls" "example" {
+  bucket = aws_s3_bucket.my-unique-terraform-bucket-2025.id
+
+  rule {
+    object_ownership = "BucketOwnerEnforced"
+  }
+}
+
+
+# Upload file to s3 bucket
+resource "aws_s3_object" "bucket_file" {
+  bucket = aws_s3_bucket.my-unique-terraform-bucket-2025.bucket
+  source = "./demofile.txt"
+  key =  "myfile.txt"
+
+}
+```
+
+#
+
+```
+terraform validate
+terraform plan
+terraform apply -auto-approve
+```
+
+![alt text](./images/image-14.png)
+![alt text](./images/image-15.png)
+![alt text](./images/image-16.png)
+Verify it using
+
+```
+terraform state list | grep aws_s3_bucket
+```
+
+![alt text](./images/image-19.png)
+OR
+Use AWS console
+![alt text](./images/image-17.png)
+![alt text](./images/image-18.png)
+
+#
+
+# Random Provider
+
+- Must read and do hands-on of
+  [Terraform Random Provider
+  ](https://registry.terraform.io/providers/hashicorp/random/latest/docs)
+
+#
