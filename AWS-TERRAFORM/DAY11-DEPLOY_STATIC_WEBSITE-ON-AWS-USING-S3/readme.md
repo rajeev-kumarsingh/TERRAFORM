@@ -471,7 +471,7 @@ terraform destroy -auto-approve
 
 OUTPUT
 
-```json
+```hcl
 random_id.random_provider_example: Refreshing state... [id=KLx8PLM]
 aws_s3_bucket.website_demo: Refreshing state... [id=static-website-demo-28bc7c3cb3]
 aws_s3_bucket_website_configuration.website_config: Refreshing state... [id=static-website-demo-28bc7c3cb3]
