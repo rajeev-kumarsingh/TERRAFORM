@@ -625,7 +625,7 @@ terraform output
 terraform destroy -auto-approve
 ```
 
-```json
+```hcl
 terraform destroy -auto-approve
 data.aws_s3_objects.tf_backend: Reading...
 aws_instance.tf-backend: Refreshing state... [id=i-0875e6db4ebded892]
