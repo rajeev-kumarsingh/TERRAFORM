@@ -272,7 +272,7 @@ resource "aws_s3_bucket_website_configuration" "website_config" {
 terraform init
 ```
 
-![alt text](image.png)
+![alt text](./images/image.png)
 
 ---
 
@@ -282,7 +282,7 @@ terraform init
 terraform validate
 ```
 
-![alt text](image-1.png)
+![alt text](./images/image-1.png)
 `Fix it`
 Change outputs.tf content from
 
@@ -301,7 +301,7 @@ output "website_url" {
 ```
 
 Now run again `terraform validate`
-![alt text](image-2.png)
+![alt text](./images/image-2.png)
 
 ---
 
@@ -311,7 +311,7 @@ Now run again `terraform validate`
 terraform plan
 ```
 
-![alt text](image-4.png)
+![alt text](./images/image-4.png)
 
 ---
 
@@ -321,7 +321,7 @@ terraform plan
 terraform apply -auto-approve
 ```
 
-![alt text](image-5.png)
+![alt text](./images/image-5.png)
 
 - The error "invalid character '{' after array element" occurs because your JSON policy contains a syntax error:
 - 👉 Each object inside the "Statement" array must be separated by a comma (,).
@@ -330,7 +330,7 @@ Let's fix it, we missed a comma(,) after closing bracker of s3:GetObject and s3:
 
 ---
 
-![alt text](image-6.png)
+![alt text](./images/image-6.png)
 `Fix it`
 
 - The error message "AccessDenied: User is not authorized to perform: s3:PutBucketPolicy because public policies are blocked by the BlockPublicPolicy setting" means that your S3 bucket has public access blocked due to the block_public_policy = true setting in aws_s3_bucket_public_access_block.
@@ -392,7 +392,7 @@ resource "aws_s3_bucket_public_access_block" "public-access" {
 ```
 
 Output
-![alt text](image-7.png)
+![alt text](./images/image-7.png)
 
 ---
 
@@ -419,7 +419,7 @@ Output
   ```
 
   - If missing, add the above JSON policy in an inline policy or attach the AmazonS3FullAccess policy temporarily.
-    ![alt text](image-8.png)
+    ![alt text](./images/image-8.png)
 
 3. Now apply again using `terraform apply -auto-approve` command
 
@@ -428,7 +428,7 @@ terraform apply -auto-approve
 ```
 
 `Output`
-![alt text](image-9.png)
+![alt text](./images/image-9.png)
 
 4. Now check the link of s3-bucket-static-website
 
@@ -436,7 +436,7 @@ terraform apply -auto-approve
 http://demo-website-a541789af0.s3-website-us-east-1.amazonaws.com
 ```
 
-![alt text](image-10.png)
+![alt text](./images/image-10.png)
 
 ---
 
@@ -633,7 +633,7 @@ variable "s3_tag" {
 terraform destroy -auto-approve
 ```
 
-```json
+```sh
 terraform destroy -auto-approve
 random_id.ran_pro_ex: Refreshing state... [id=pUF4mvA]
 aws_s3_bucket.demo-website: Refreshing state... [id=demo-website-a541789af0]
