@@ -219,3 +219,23 @@ While attempting to import an existing object to "aws_s3_directory_bucket.my_buc
 │ configured region or endpoint, or use "terraform apply" to create a new remote object for this resource.
 
 ---
+
+## Important Links to follow
+
+1. Argument Reference:
+   [argument reference](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#argument-reference)
+2. CORS rule : [CORS rule](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#cors-rule)
+3. Grant: [Grant](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#grant)
+4. Lifecycle rule: [lifecycle rule](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#lifecycle-rule)
+5. [Expiration](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#expiration)
+6. [Transition](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#transition)
+7. [Logging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#logging)
+8. [Replictaion Configuration](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#replication-configuration)
+9. [Server side encryption configuration](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#server-side-encryption-configuration)
+10. [versioning](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#versioning)
+11. [website](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#website)
+12. [Attribute Reference](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#attribute-reference)
+13. [timeouts](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#timeouts)
+14. [import](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#import)
+15.
+16.
