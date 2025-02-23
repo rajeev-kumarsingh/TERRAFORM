@@ -217,3 +217,5 @@ terraform apply -auto-approve
 While attempting to import an existing object to "aws_s3_directory_bucket.my_bucket", the provider detected that no object exists with
 │ the given id. Only pre-existing objects can be imported; check that the id is correct and that it is associated with the provider's
 │ configured region or endpoint, or use "terraform apply" to create a new remote object for this resource.
+
+---
