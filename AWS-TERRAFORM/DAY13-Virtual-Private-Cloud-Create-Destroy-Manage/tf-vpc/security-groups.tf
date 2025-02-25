@@ -1,6 +1,6 @@
 # Allow SSH
 resource "aws_security_group" "allow_ssh" {
-  vpc_id = var.vpc_id
+  vpc_id = aws_vpc.tf-vpc.id
   name   = "allow_ssh"
 
   # Allow SSH
@@ -25,7 +25,7 @@ resource "aws_security_group" "allow_ssh" {
 
 # Allow HTTP
 resource "aws_security_group" "allow_http" {
-  vpc_id = var.vpc_id
+  vpc_id = aws_vpc.tf-vpc.id
   name   = "allow_http"
 
   ingress {
@@ -50,7 +50,7 @@ resource "aws_security_group" "allow_http" {
 # Allow HTTPS
 resource "aws_security_group" "allow_https" {
   description = "Allow https at port 443"
-  vpc_id      = var.vpc_id
+  vpc_id      = aws_vpc.tf-vpc.id
   name        = "allow_https"
 
   ingress {
