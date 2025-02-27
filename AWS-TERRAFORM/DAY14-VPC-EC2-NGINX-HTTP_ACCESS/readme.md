@@ -1456,6 +1456,10 @@ resource "aws_instance" "nginx-ec2-machine" {
   instance_type = "t2.micro"
   subnet_id = aws_subnet.my_vpc_public_subnet.id
   associate_public_ip_address = true
+  vpc_security_group_ids = [
+    aws_security_group.my_vpc_sg.id, aws_security_group.allow_http.id
+
+  ]
 
   user_data = <<-EOF
               #!/bin/bash
@@ -1466,10 +1470,10 @@ resource "aws_instance" "nginx-ec2-machine" {
               EOF
 
 
-
   tags = {
     Name = "nginx-ec2-machine"
   }
+
 }
 
 ```
@@ -1553,7 +1557,7 @@ route_table_id = "rtb-0639a6fff7a6109d3"
 
 ```
 
----
+## ![alt text](image.png)
 
 - let's add code to get Output the full HTTP URL to access the NGINX server in `outputs.tf`
 
@@ -1623,8 +1627,397 @@ nginx_ec2_machine_public_ip = "34.228.224.8"
 route_table_id = "rtb-0639a6fff7a6109d3"
 ```
 
-9.
-10.
-11.
-12.
-13.
+![alt text](image-1.png)
+
+9. Clean Up
+
+```sh
+terraform destroy -auto-approve
+```
+
+`Output:`
+
+```sh
+terraform destroy
+aws_vpc.my_vpc: Refreshing state... [id=vpc-0382ac6239a0293a2]
+aws_internet_gateway.my_vpc_igw: Refreshing state... [id=igw-0790b7b72fe215a99]
+aws_subnet.my_vpc_public_subnet: Refreshing state... [id=subnet-034992f90c9d80a06]
+aws_subnet.my_vpc_private_subnet: Refreshing state... [id=subnet-0dc15ccd6f84503f6]
+aws_security_group.allow_http: Refreshing state... [id=sg-04ed01319c22c836f]
+aws_security_group.my_vpc_sg: Refreshing state... [id=sg-0bed57e936f85c653]
+aws_route.main_route_table: Refreshing state... [id=r-rtb-0478d16e365ae5c661080289494]
+aws_instance.nginx-ec2-machine: Refreshing state... [id=i-07b7c3efda436181b]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are
+indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # aws_instance.nginx-ec2-machine will be destroyed
+  - resource "aws_instance" "nginx-ec2-machine" {
+      - ami                                  = "ami-04b4f1a9cf54c11d0" -> null
+      - arn                                  = "arn:aws:ec2:us-east-1:442042538773:instance/i-07b7c3efda436181b" -> null
+      - associate_public_ip_address          = true -> null
+      - availability_zone                    = "us-east-1a" -> null
+      - cpu_core_count                       = 1 -> null
+      - cpu_threads_per_core                 = 1 -> null
+      - disable_api_stop                     = false -> null
+      - disable_api_termination              = false -> null
+      - ebs_optimized                        = false -> null
+      - get_password_data                    = false -> null
+      - hibernation                          = false -> null
+      - id                                   = "i-07b7c3efda436181b" -> null
+      - instance_initiated_shutdown_behavior = "stop" -> null
+      - instance_state                       = "running" -> null
+      - instance_type                        = "t2.micro" -> null
+      - ipv6_address_count                   = 0 -> null
+      - ipv6_addresses                       = [] -> null
+      - monitoring                           = false -> null
+      - placement_partition_number           = 0 -> null
+      - primary_network_interface_id         = "eni-0de11b4ebbbe63dbd" -> null
+      - private_dns                          = "ip-10-0-1-110.ec2.internal" -> null
+      - private_ip                           = "10.0.1.110" -> null
+      - public_ip                            = "18.206.227.239" -> null
+      - secondary_private_ips                = [] -> null
+      - security_groups                      = [] -> null
+      - source_dest_check                    = true -> null
+      - subnet_id                            = "subnet-034992f90c9d80a06" -> null
+      - tags                                 = {
+          - "Name" = "nginx-ec2-machine"
+        } -> null
+      - tags_all                             = {
+          - "Name" = "nginx-ec2-machine"
+        } -> null
+      - tenancy                              = "default" -> null
+      - user_data                            = "1913ddcae85736ea3ea7d00a8b328b13194a6554" -> null
+      - user_data_replace_on_change          = false -> null
+      - vpc_security_group_ids               = [
+          - "sg-04ed01319c22c836f",
+          - "sg-0bed57e936f85c653",
+        ] -> null
+        # (9 unchanged attributes hidden)
+
+      - capacity_reservation_specification {
+          - capacity_reservation_preference = "open" -> null
+        }
+
+      - cpu_options {
+          - core_count       = 1 -> null
+          - threads_per_core = 1 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - credit_specification {
+          - cpu_credits = "standard" -> null
+        }
+
+      - enclave_options {
+          - enabled = false -> null
+        }
+
+      - maintenance_options {
+          - auto_recovery = "default" -> null
+        }
+
+      - metadata_options {
+          - http_endpoint               = "enabled" -> null
+          - http_protocol_ipv6          = "disabled" -> null
+          - http_put_response_hop_limit = 2 -> null
+          - http_tokens                 = "required" -> null
+          - instance_metadata_tags      = "disabled" -> null
+        }
+
+      - private_dns_name_options {
+          - enable_resource_name_dns_a_record    = false -> null
+          - enable_resource_name_dns_aaaa_record = false -> null
+          - hostname_type                        = "ip-name" -> null
+        }
+
+      - root_block_device {
+          - delete_on_termination = true -> null
+          - device_name           = "/dev/sda1" -> null
+          - encrypted             = false -> null
+          - iops                  = 3000 -> null
+          - tags                  = {} -> null
+          - tags_all              = {} -> null
+          - throughput            = 125 -> null
+          - volume_id             = "vol-0c9ce5e6eb7051b86" -> null
+          - volume_size           = 8 -> null
+          - volume_type           = "gp3" -> null
+            # (1 unchanged attribute hidden)
+        }
+    }
+
+  # aws_internet_gateway.my_vpc_igw will be destroyed
+  - resource "aws_internet_gateway" "my_vpc_igw" {
+      - arn      = "arn:aws:ec2:us-east-1:442042538773:internet-gateway/igw-0790b7b72fe215a99" -> null
+      - id       = "igw-0790b7b72fe215a99" -> null
+      - owner_id = "442042538773" -> null
+      - tags     = {
+          - "Name" = "my_vpc_igw"
+        } -> null
+      - tags_all = {
+          - "Name" = "my_vpc_igw"
+        } -> null
+      - vpc_id   = "vpc-0382ac6239a0293a2" -> null
+    }
+
+  # aws_route.main_route_table will be destroyed
+  - resource "aws_route" "main_route_table" {
+      - destination_cidr_block      = "0.0.0.0/0" -> null
+      - gateway_id                  = "igw-0790b7b72fe215a99" -> null
+      - id                          = "r-rtb-0478d16e365ae5c661080289494" -> null
+      - origin                      = "CreateRoute" -> null
+      - route_table_id              = "rtb-0478d16e365ae5c66" -> null
+      - state                       = "active" -> null
+        # (13 unchanged attributes hidden)
+    }
+
+  # aws_security_group.allow_http will be destroyed
+  - resource "aws_security_group" "allow_http" {
+      - arn                    = "arn:aws:ec2:us-east-1:442042538773:security-group/sg-04ed01319c22c836f" -> null
+      - description            = "Managed by Terraform" -> null
+      - egress                 = [
+          - {
+              - cidr_blocks      = [
+                  - "0.0.0.0/0",
+                ]
+              - description      = "Allow all outbound traffic"
+              - from_port        = 0
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "-1"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 0
+            },
+        ] -> null
+      - id                     = "sg-04ed01319c22c836f" -> null
+      - ingress                = [
+          - {
+              - cidr_blocks      = [
+                  - "0.0.0.0/0",
+                ]
+              - description      = "Allow HTTP traffic"
+              - from_port        = 80
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 80
+            },
+        ] -> null
+      - name                   = "allow_http" -> null
+      - owner_id               = "442042538773" -> null
+      - revoke_rules_on_delete = false -> null
+      - tags                   = {
+          - "Name" = "allow_http"
+        } -> null
+      - tags_all               = {
+          - "Name" = "allow_http"
+        } -> null
+      - vpc_id                 = "vpc-0382ac6239a0293a2" -> null
+        # (1 unchanged attribute hidden)
+    }
+
+  # aws_security_group.my_vpc_sg will be destroyed
+  - resource "aws_security_group" "my_vpc_sg" {
+      - arn                    = "arn:aws:ec2:us-east-1:442042538773:security-group/sg-0bed57e936f85c653" -> null
+      - description            = "Managed by Terraform" -> null
+      - egress                 = [
+          - {
+              - cidr_blocks      = [
+                  - "0.0.0.0/0",
+                ]
+              - description      = "Allow all outbound traffic"
+              - from_port        = 0
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "-1"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 0
+            },
+        ] -> null
+      - id                     = "sg-0bed57e936f85c653" -> null
+      - ingress                = [
+          - {
+              - cidr_blocks      = [
+                  - "0.0.0.0/0",
+                ]
+              - description      = "Allow SSH traffic"
+              - from_port        = 22
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 22
+            },
+        ] -> null
+      - name                   = "allow_ssh" -> null
+      - owner_id               = "442042538773" -> null
+      - revoke_rules_on_delete = false -> null
+      - tags                   = {
+          - "Name" = "allow_ssh"
+        } -> null
+      - tags_all               = {
+          - "Name" = "allow_ssh"
+        } -> null
+      - vpc_id                 = "vpc-0382ac6239a0293a2" -> null
+        # (1 unchanged attribute hidden)
+    }
+
+  # aws_subnet.my_vpc_private_subnet will be destroyed
+  - resource "aws_subnet" "my_vpc_private_subnet" {
+      - arn                                            = "arn:aws:ec2:us-east-1:442042538773:subnet/subnet-0dc15ccd6f84503f6" -> null
+      - assign_ipv6_address_on_creation                = false -> null
+      - availability_zone                              = "us-east-1a" -> null
+      - availability_zone_id                           = "use1-az2" -> null
+      - cidr_block                                     = "10.0.2.0/24" -> null
+      - enable_dns64                                   = false -> null
+      - enable_lni_at_device_index                     = 0 -> null
+      - enable_resource_name_dns_a_record_on_launch    = false -> null
+      - enable_resource_name_dns_aaaa_record_on_launch = false -> null
+      - id                                             = "subnet-0dc15ccd6f84503f6" -> null
+      - ipv6_native                                    = false -> null
+      - map_customer_owned_ip_on_launch                = false -> null
+      - map_public_ip_on_launch                        = false -> null
+      - owner_id                                       = "442042538773" -> null
+      - private_dns_hostname_type_on_launch            = "ip-name" -> null
+      - tags                                           = {
+          - "Name" = "my_vpc_private_subnet"
+        } -> null
+      - tags_all                                       = {
+          - "Name" = "my_vpc_private_subnet"
+        } -> null
+      - vpc_id                                         = "vpc-0382ac6239a0293a2" -> null
+        # (4 unchanged attributes hidden)
+    }
+
+  # aws_subnet.my_vpc_public_subnet will be destroyed
+  - resource "aws_subnet" "my_vpc_public_subnet" {
+      - arn                                            = "arn:aws:ec2:us-east-1:442042538773:subnet/subnet-034992f90c9d80a06" -> null
+      - assign_ipv6_address_on_creation                = false -> null
+      - availability_zone                              = "us-east-1a" -> null
+      - availability_zone_id                           = "use1-az2" -> null
+      - cidr_block                                     = "10.0.1.0/24" -> null
+      - enable_dns64                                   = false -> null
+      - enable_lni_at_device_index                     = 0 -> null
+      - enable_resource_name_dns_a_record_on_launch    = false -> null
+      - enable_resource_name_dns_aaaa_record_on_launch = false -> null
+      - id                                             = "subnet-034992f90c9d80a06" -> null
+      - ipv6_native                                    = false -> null
+      - map_customer_owned_ip_on_launch                = false -> null
+      - map_public_ip_on_launch                        = false -> null
+      - owner_id                                       = "442042538773" -> null
+      - private_dns_hostname_type_on_launch            = "ip-name" -> null
+      - tags                                           = {
+          - "Name" = "my_vpc_public_subnet"
+        } -> null
+      - tags_all                                       = {
+          - "Name" = "my_vpc_public_subnet"
+        } -> null
+      - vpc_id                                         = "vpc-0382ac6239a0293a2" -> null
+        # (4 unchanged attributes hidden)
+    }
+
+  # aws_vpc.my_vpc will be destroyed
+  - resource "aws_vpc" "my_vpc" {
+      - arn                                  = "arn:aws:ec2:us-east-1:442042538773:vpc/vpc-0382ac6239a0293a2" -> null
+      - assign_generated_ipv6_cidr_block     = false -> null
+      - cidr_block                           = "10.0.0.0/16" -> null
+      - default_network_acl_id               = "acl-06ec80d2583524404" -> null
+      - default_route_table_id               = "rtb-0478d16e365ae5c66" -> null
+      - default_security_group_id            = "sg-00fab5ca75c1297af" -> null
+      - dhcp_options_id                      = "dopt-0445cbb5d487fb1af" -> null
+      - enable_dns_hostnames                 = false -> null
+      - enable_dns_support                   = true -> null
+      - enable_network_address_usage_metrics = false -> null
+      - id                                   = "vpc-0382ac6239a0293a2" -> null
+      - instance_tenancy                     = "default" -> null
+      - ipv6_netmask_length                  = 0 -> null
+      - main_route_table_id                  = "rtb-0478d16e365ae5c66" -> null
+      - owner_id                             = "442042538773" -> null
+      - tags                                 = {
+          - "Environment" = "test"
+          - "Name"        = "my_vpc"
+          - "Tool"        = "terraform"
+        } -> null
+      - tags_all                             = {
+          - "Environment" = "test"
+          - "Name"        = "my_vpc"
+          - "Tool"        = "terraform"
+        } -> null
+        # (4 unchanged attributes hidden)
+    }
+
+Plan: 0 to add, 0 to change, 8 to destroy.
+
+Changes to Outputs:
+  - aws_vpc_id                       = "vpc-0382ac6239a0293a2" -> null
+  - my_vpc_igw_id                    = "igw-0790b7b72fe215a99" -> null
+  - my_vpc_private_subnet_id         = "subnet-0dc15ccd6f84503f6" -> null
+  - my_vpc_public_subnet_id          = "subnet-034992f90c9d80a06" -> null
+  - my_vpc_security_group_allow_http = "sg-04ed01319c22c836f" -> null
+  - my_vpc_security_group_allow_ssh  = "sg-0bed57e936f85c653" -> null
+  - nginx-ec2-machine-url            = "http://18.206.227.239" -> null
+  - nginx_ec2_machine_id             = "i-07b7c3efda436181b" -> null
+  - nginx_ec2_machine_private_ip     = "10.0.1.110" -> null
+  - nginx_ec2_machine_public_ip      = "18.206.227.239" -> null
+  - route_table_id                   = "rtb-0478d16e365ae5c66" -> null
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+aws_route.main_route_table: Destroying... [id=r-rtb-0478d16e365ae5c661080289494]
+aws_subnet.my_vpc_private_subnet: Destroying... [id=subnet-0dc15ccd6f84503f6]
+aws_instance.nginx-ec2-machine: Destroying... [id=i-07b7c3efda436181b]
+aws_subnet.my_vpc_private_subnet: Destruction complete after 3s
+aws_route.main_route_table: Destruction complete after 3s
+aws_internet_gateway.my_vpc_igw: Destroying... [id=igw-0790b7b72fe215a99]
+aws_instance.nginx-ec2-machine: Still destroying... [id=i-07b7c3efda436181b, 10s elapsed]
+aws_internet_gateway.my_vpc_igw: Still destroying... [id=igw-0790b7b72fe215a99, 10s elapsed]
+aws_instance.nginx-ec2-machine: Still destroying... [id=i-07b7c3efda436181b, 20s elapsed]
+aws_internet_gateway.my_vpc_igw: Still destroying... [id=igw-0790b7b72fe215a99, 20s elapsed]
+aws_instance.nginx-ec2-machine: Still destroying... [id=i-07b7c3efda436181b, 30s elapsed]
+aws_internet_gateway.my_vpc_igw: Still destroying... [id=igw-0790b7b72fe215a99, 30s elapsed]
+aws_instance.nginx-ec2-machine: Still destroying... [id=i-07b7c3efda436181b, 40s elapsed]
+aws_internet_gateway.my_vpc_igw: Still destroying... [id=igw-0790b7b72fe215a99, 40s elapsed]
+aws_instance.nginx-ec2-machine: Still destroying... [id=i-07b7c3efda436181b, 50s elapsed]
+aws_internet_gateway.my_vpc_igw: Still destroying... [id=igw-0790b7b72fe215a99, 50s elapsed]
+aws_instance.nginx-ec2-machine: Still destroying... [id=i-07b7c3efda436181b, 1m0s elapsed]
+aws_internet_gateway.my_vpc_igw: Still destroying... [id=igw-0790b7b72fe215a99, 1m0s elapsed]
+aws_instance.nginx-ec2-machine: Still destroying... [id=i-07b7c3efda436181b, 1m10s elapsed]
+aws_internet_gateway.my_vpc_igw: Still destroying... [id=igw-0790b7b72fe215a99, 1m10s elapsed]
+aws_internet_gateway.my_vpc_igw: Destruction complete after 1m16s
+aws_instance.nginx-ec2-machine: Still destroying... [id=i-07b7c3efda436181b, 1m20s elapsed]
+aws_instance.nginx-ec2-machine: Destruction complete after 1m28s
+aws_subnet.my_vpc_public_subnet: Destroying... [id=subnet-034992f90c9d80a06]
+aws_security_group.allow_http: Destroying... [id=sg-04ed01319c22c836f]
+aws_security_group.my_vpc_sg: Destroying... [id=sg-0bed57e936f85c653]
+aws_subnet.my_vpc_public_subnet: Destruction complete after 1s
+aws_security_group.allow_http: Destruction complete after 2s
+aws_security_group.my_vpc_sg: Destruction complete after 2s
+aws_vpc.my_vpc: Destroying... [id=vpc-0382ac6239a0293a2]
+aws_vpc.my_vpc: Destruction complete after 1s
+
+Destroy complete! Resources: 8 destroyed.
+```
+
+---
+
+10. 11. 12. 13.
+
+---
+
+# Important Links
+
+# AWS Security Group
+
+[Data Source: aws_security_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group)
