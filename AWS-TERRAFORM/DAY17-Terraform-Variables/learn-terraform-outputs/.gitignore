@@ -1,15 +1,3 @@
-##########################################################
-# The following list is not tracked by git
-##########################################################
-.env
-.terraform/
-.DS_Store
-.terraform/*
-.terraform.lock.hcl
-terraform.tfstate
-terraform.tfstate.backup
-tfplan
-
 # Local .terraform directories
 **/.terraform/*
 

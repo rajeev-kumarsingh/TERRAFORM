@@ -39,3 +39,11 @@
 # Terraform Modules
 
 https://developer.hashicorp.com/terraform/language/modules
+
+# Input variables on the command line
+
+https://developer.hashicorp.com/terraform/cli/commands/plan#input-variables-on-the-command-line
+
+# Terraform AWS module (ALL)- with code
+
+https://github.com/orgs/terraform-aws-modules/repositories?type=all
