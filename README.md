@@ -47,3 +47,7 @@ https://developer.hashicorp.com/terraform/cli/commands/plan#input-variables-on-t
 # Terraform AWS module (ALL)- with code
 
 https://github.com/orgs/terraform-aws-modules/repositories?type=all
+
+# Terraform Operators and expressions
+
+https://developer.hashicorp.com/terraform/language/expressions/operators
