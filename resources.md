@@ -1,0 +1,5 @@
+1. Terraform Tutorial: [`Get Started - AWS`](https://developer.hashicorp.com/terraform/tutorials/aws-get-started)
+2. Custome Checks: [`custom checks`](https://developer.hashicorp.com/terraform/tutorials/configuration-language/checks)
+3. Validate Modules: [`validate modules with custom conditions`](https://developer.hashicorp.com/terraform/tutorials/configuration-language/custom-conditions)
+4. Local Values: ['Terraform Local Values '](https://developer.hashicorp.com/terraform/language/values/locals)
+5. Terraform Output Documentation: [`Terraforrm Output`](https://developer.hashicorp.com/terraform/language/values/outputs)
