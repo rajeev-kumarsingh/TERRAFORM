@@ -1,0 +1,3 @@
+provider "http" {
+  # Configuration options 
+}
